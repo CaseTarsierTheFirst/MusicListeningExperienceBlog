@@ -1,4 +1,4 @@
-/* General Styles */
+/* Global Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -33,7 +33,7 @@ nav ul li a {
 
 /* Banner Section */
 .banner {
-    background-image: url('../images/banner.jpg'); /* Make sure this image exists */
+    background-image: url('../images/banner.jpg'); /* Ensure this image exists */
     background-size: cover;
     text-align: center;
     color: white;
@@ -57,6 +57,7 @@ nav ul li a {
 
 .article-list {
     display: flex;
+    flex-wrap: wrap;  /* Makes it responsive */
     justify-content: center;
     gap: 20px;
 }
@@ -67,6 +68,12 @@ nav ul li a {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 30%;
+    min-width: 250px;  /* Prevents articles from being too small */
+    transition: transform 0.3s ease;
+}
+
+.article:hover {
+    transform: scale(1.05);
 }
 
 .article h3 a {
@@ -86,4 +93,24 @@ footer {
     text-align: center;
     padding: 15px 0;
     margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .article-list {
+        flex-direction: column; /* Stacks articles on smaller screens */
+        align-items: center;
+    }
+    
+    .article {
+        width: 90%; /* Full width on smaller screens */
+    }
+
+    .banner h2 {
+        font-size: 28px;
+    }
+
+    .banner p {
+        font-size: 18px;
+    }
 }
