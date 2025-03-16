@@ -1,0 +1,89 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Navigation Bar */
+header {
+    background-color: #222;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Banner Section */
+.banner {
+    background-image: url('../images/banner.jpg'); /* Make sure this image exists */
+    background-size: cover;
+    text-align: center;
+    color: white;
+    padding: 100px 0;
+}
+
+.banner h2 {
+    font-size: 36px;
+    margin: 0;
+}
+
+.banner p {
+    font-size: 20px;
+}
+
+/* Articles Section */
+.articles {
+    padding: 40px;
+    text-align: center;
+}
+
+.article-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.article {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 30%;
+}
+
+.article h3 a {
+    text-decoration: none;
+    color: #222;
+}
+
+.article p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Footer */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px;
+}
