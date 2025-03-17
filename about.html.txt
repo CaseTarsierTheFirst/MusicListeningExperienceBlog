@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Music Blog</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ℹ️ About This Blog</h1>
+        </header>
+
+        <nav>
+            <a href="index.html">🏠 Home</a>
+            <a href="articles.html">📚 All Articles</a>
+            <a href="about.html">ℹ️ About</a>
+        </nav>
+
+        <main>
+            <p>🎵 Welcome to <strong>Music Listening Experiences</strong>, a personal blog dedicated to in-depth music reviews and discussions.</p>
+            <p>Here, we explore albums, artists, and the emotions behind the music. Whether it's classic rock, indie, or experimental soundscapes, you'll find a variety of perspectives.</p>
+            <p>Stay tuned for updates and feel free to reach out with recommendations!</p>
+        </main>
+
+        <footer>
+            <p>🎶 Music Blog - Powered by GitHub Pages</p>
+        </footer>
+    </div>
+</body>
+</html>
