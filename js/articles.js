@@ -1,6 +1,6 @@
 // List of articles (add new ones here)
 const articles = [
-    { title: "Radiohead - OK Computer", url: "articles/radiohead_ok_computer.html", image: "images/radiohead_ok_computer.jpg", date: "March 17, 2025" },
+    { title: "Roxette - Look Sharp!", url: "articles/Roxette_Look_Sharp!.html", image: "images/roxettelooksharp.jpg", date: "March 17, 2025" },
     { title: "Nirvana - Nevermind", url: "articles/nirvana_nevermind.html", image: "images/nirvana_nevermind.jpg", date: "March 15, 2025" },
     { title: "Pink Floyd - The Dark Side of the Moon", url: "articles/pink_floyd_dark_side.html", image: "images/pink_floyd_dark_side.jpg", date: "March 10, 2025" }
 ];
