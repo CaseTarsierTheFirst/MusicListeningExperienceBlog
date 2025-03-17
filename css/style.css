@@ -87,7 +87,10 @@ main {
 
 .article-card img {
     width: 100%;
+    height: auto; /* Ensure image keeps aspect ratio */
+    max-height: 180px; /* Limit the height */
     border-radius: 8px;
+    object-fit: cover; /* Ensures the image fits within the container */
 }
 
 .article-card h3 {
@@ -110,4 +113,22 @@ footer {
     background: #333;
     color: white;
     border-radius: 0 0 8px 8px;
+}
+
+/* Stylized Buttons */
+.button {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.button:hover {
+    background-color: #555;
+    transform: scale(1.05);
 }
