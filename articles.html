@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Articles</title>
+    <title>All Articles - Music Blog</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🎵 All Articles</h1>
-            <p>Your collection of in-depth music reviews and discussions.</p>
+            <h1>🎶 All Articles</h1>
+            <p>Browse through all the articles in our music blog.</p>
         </header>
 
         <nav>
@@ -20,7 +20,11 @@
         </nav>
 
         <main>
-            <h2>🆕 Latest Articles</h2>
+            <h2>🆕 Articles</h2>
+
+            <!-- Search Bar for Tags -->
+            <input type="text" id="search-input" placeholder="Search by tag..." oninput="searchArticles()" style="padding: 10px; width: 100%; max-width: 300px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc;" />
+
             <div id="articles-grid" class="articles-grid">
                 <!-- Articles will be inserted here dynamically -->
             </div>
@@ -31,6 +35,6 @@
         </footer>
     </div>
 
-    <script src="js/articles.js"></script> <!-- Ensure this file is linked correctly -->
+    <script src="js/articles.js"></script>
 </body>
 </html>
