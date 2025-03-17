@@ -90,14 +90,15 @@ main {
     transform: scale(1.05);
 }
 
+/* Article Card Image Styling */
 .article-card img {
-    width: 100%;
-    height: auto;
-    max-width: 400px; /* Max size for images */
-    max-height: 400px; /* Max height for images */
-    border-radius: 8px;
-    object-fit: cover;
+    width: 100%;             /* Ensures the image fills the card width */
+    max-width: 400px;        /* Limits the image size */
+    height: auto;            /* Maintains aspect ratio */
+    border-radius: 8px;      /* Rounded corners */
+    object-fit: cover;       /* Ensures image covers the container without distortion */
 }
+
 
 .article-card h3 {
     font-size: 18px;
