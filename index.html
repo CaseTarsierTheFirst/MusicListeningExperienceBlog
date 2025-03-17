@@ -3,52 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Music Blog</title>
+    <title>Music Blog</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <header>
-        <h1>🎵 My Music Blog</h1>
+    <div class="container">
+        <header>
+            <h1>🎵 Music Listening Experiences</h1>
+            <p>Your home for in-depth music reviews and discussions.</p>
+        </header>
+
         <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-		<li><a href="Articles/Roxette_Look_Sharp!.html">Roxette - Look Sharp!</a></li>
-                <li><a href="Articles/article1.html">Article 1</a></li>
-                <li><a href="Articles/article2.html">Article 2</a></li>
-                <li><a href="Articles/article3.html">Article 3</a></li>
-            </ul>
+            <a href="index.html">🏠 Home</a>
+            <a href="articles.html">📚 All Articles</a>
         </nav>
-    </header>
 
-    <!-- Banner Section -->
-    <section class="banner">
-        <h2>Welcome to My Music Blog</h2>
-        <p>Exploring the world of music, one article at a time.</p>
-    </section>
+        <main>
+            <h2>🆕 Latest Articles</h2>
+            <div id="articles-grid" class="articles-grid">
+                <!-- Articles will be inserted here dynamically -->
+            </div>
+        </main>
 
-    <!-- Articles Section -->
-    <section class="articles">
-        <h2>Latest Articles</h2>
-        <div class="article-list">
-            <div class="article">
-                <h3><a href="articles/article1.html">🎵 Understanding Jazz</a></h3>
-                <p>A deep dive into the roots and evolution of jazz.</p>
-            </div>
-            <div class="article">
-                <h3><a href="articles/article2.html">🎸 The History of Rock</a></h3>
-                <p>Tracing the journey of rock music from the 1950s to today.</p>
-            </div>
-            <div class="article">
-                <h3><a href="articles/article3.html">🎶 How Music Affects Your Brain</a></h3>
-                <p>The science behind how different genres influence our minds.</p>
-            </div>
-        </div>
-    </section>
+        <footer>
+            <p>🎶 Music Blog - Powered by GitHub Pages</p>
+        </footer>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 My Music Blog | Powered by GitHub Pages</p>
-    </footer>
+    <script src="js/articles.js"></script>
 </body>
 </html>
