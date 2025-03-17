@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radiohead - OK Computer</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <meta name="tags" content="Radiohead, OK Computer, alternative rock, 1997, music review">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎸 Radiohead – OK Computer (1997)</h1>
+        </header>
+
+        <nav>
+            <a href="../index.html">🏠 Home</a>
+            <a href="../articles.html">📚 All Articles</a>
+        </nav>
+
+        <main>
+            <div class="article-header">
+                <p class="article-meta">📅 Published on: March 17, 2025</p>
+            </div>
+
+            <img src="../images/radiohead_ok_computer.jpg" alt="OK Computer Album Cover" class="album-cover">
+
+            <h2>Introduction</h2>
+            <p><strong>OK Computer</strong> is a groundbreaking album released in 1997 by the British rock band <strong>Radiohead</strong>. It redefined alternative rock and is considered one of the greatest albums of all time.</p>
+            
+            <h2>Tracklist</h2>
+            <ol>
+                <li>Airbag</li>
+                <li>Paranoid Android</li>
+                <li>Subterranean Homesick Alien</li>
+                <li>Exit Music (For a Film)</li>
+                <li>Let Down</li>
+                <li>Karma Police</li>
+                <li>Fitter Happier</li>
+                <li>Electioneering</li>
+                <li>Climbing Up the Walls</li>
+                <li>No Surprises</li>
+                <li>Lucky</li>
+                <li>The Tourist</li>
+            </ol>
+
+            <h2>Why It’s Iconic</h2>
+            <p>With themes of <em>technology, isolation, and dystopia</em>, OK Computer pushed the boundaries of rock music. Songs like <strong>"Paranoid Android"</strong> and <strong>"Karma Police"</strong> blend experimental sounds with deep, introspective lyrics.</p>
+
+            <h2>Final Thoughts</h2>
+            <p>This album is a must-listen for any music fan. Its influence is still felt today in modern alternative and electronic music.</p>
+
+            <h3>⭐ Rating: 10/10</h3>
+        </main>
+
+        <footer>
+            <p>🔍 Tags: Radiohead, OK Computer, alternative rock, 1997, music review</p>
+        </footer>
+    </div>
+</body>
+</html>
