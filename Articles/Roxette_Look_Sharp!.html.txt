@@ -8,17 +8,23 @@
     <meta name="tags" content="Radiohead, OK Computer, alternative rock, 1997, music review">
 </head>
 <body>
-    <header>
-        <h1>🎸 Radiohead – OK Computer (1997)</h1>
+    <div class="container">
+        <header>
+            <h1>🎸 Radiohead – OK Computer (1997)</h1>
+        </header>
+
         <nav>
             <a href="../index.html">🏠 Home</a>
             <a href="../articles.html">📚 All Articles</a>
         </nav>
-    </header>
 
-    <main>
-        <article>
+        <main>
+            <div class="article-header">
+                <p class="article-meta">📅 Published on: March 17, 2025</p>
+            </div>
+
             <img src="../images/radiohead_ok_computer.jpg" alt="OK Computer Album Cover" class="album-cover">
+
             <h2>Introduction</h2>
             <p><strong>OK Computer</strong> is a groundbreaking album released in 1997 by the British rock band <strong>Radiohead</strong>. It redefined alternative rock and is considered one of the greatest albums of all time.</p>
             
@@ -45,12 +51,11 @@
             <p>This album is a must-listen for any music fan. Its influence is still felt today in modern alternative and electronic music.</p>
 
             <h3>⭐ Rating: 10/10</h3>
-        </article>
-    </main>
+        </main>
 
-    <footer>
-        <p>📅 Published on: March 17, 2025</p>
-        <p>🔍 Tags: Radiohead, OK Computer, alternative rock, 1997, music review</p>
-    </footer>
+        <footer>
+            <p>🔍 Tags: Radiohead, OK Computer, alternative rock, 1997, music review</p>
+        </footer>
+    </div>
 </body>
 </html>
