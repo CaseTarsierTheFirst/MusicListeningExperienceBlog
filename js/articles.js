@@ -1,34 +1,26 @@
 // List of articles with tags (add new ones here)
 const articles = [
-    { 
-        title: "Roxette - Look Sharp!", 
-        url: "Articles/Roxette_Look_Sharp!.html", 
-        image: "images/roxettelooksharp.jpg", 
-        date: "March 17, 2025", 
-        tags: ["Roxette", "Pop Rock", "1988"] 
-    }
-    // Add more articles as needed
+    { title: "Roxette - Look Sharp!", url: "Articles/Roxette_Look_Sharp!.html", 
+     image: "images/roxettelooksharp.jpg", 
+     date: "March 17, 2025", 
+     tags: ["roxette", "1988", "pop", "album review"] }
 ];
 
 // Function to generate article cards
-function loadArticles(filteredArticles = articles) {
+function loadArticles() {
     const container = document.getElementById("articles-grid");
+    container.innerHTML = ""; // Clear existing content
 
-    // Check if the container is found
-    if (!container) {
-        console.error('Could not find the articles-grid container!');
-        return;
-    }
+    const searchInput = document.getElementById("search-input").value.toLowerCase();
+    const filteredArticles = articles.filter(article => 
+        article.tags.some(tag => tag.toLowerCase().includes(searchInput))
+    );
 
-    // Clear existing content
-    container.innerHTML = "";
-
-    // Loop through the articles array (or filtered articles) and create the article cards
     filteredArticles.forEach(article => {
         const articleCard = `
             <div class="article-card">
                 <a href="${article.url}">
-                    <img src="${article.image}" alt="${article.title}" class="article-image">
+                    <img src="${article.image}" alt="${article.title}">
                     <h3>${article.title}</h3>
                     <p class="article-date">📅 ${article.date}</p>
                     <p class="article-tags">Tags: ${article.tags.join(", ")}</p>
@@ -39,20 +31,10 @@ function loadArticles(filteredArticles = articles) {
     });
 }
 
-// Function to search articles based on the input text
+// Run on page load
+document.addEventListener("DOMContentLoaded", loadArticles);
+
+// Function to search articles based on the search input
 function searchArticles() {
-    const searchTerm = document.getElementById("search-input").value.toLowerCase();
-    
-    // Filter articles based on tags
-    const filteredArticles = articles.filter(article => {
-        return article.tags.some(tag => tag.toLowerCase().includes(searchTerm));
-    });
-
-    // Reload articles with the filtered list
-    loadArticles(filteredArticles);
+    loadArticles(); // Re-run the loadArticles function whenever search input changes
 }
-
-// Run the function when the document is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-    loadArticles();  // Load all articles initially
-});
