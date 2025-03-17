@@ -5,10 +5,18 @@ const articles = [
 
 // Function to generate article cards
 function loadArticles() {
-    console.log("Articles are being loaded...")
     const container = document.getElementById("articles-grid");
-    container.innerHTML = ""; // Clear existing content
 
+    // Check if the container is found
+    if (!container) {
+        console.error('Could not find the articles-grid container!');
+        return;
+    }
+
+    // Clear existing content
+    container.innerHTML = "";
+
+    // Loop through the articles array and create the article cards
     articles.forEach(article => {
         const articleCard = `
             <div class="article-card">
@@ -23,5 +31,5 @@ function loadArticles() {
     });
 }
 
-// Run on page load
+// Run the function when the document is fully loaded
 document.addEventListener("DOMContentLoaded", loadArticles);
