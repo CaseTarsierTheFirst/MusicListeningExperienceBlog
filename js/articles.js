@@ -5,7 +5,7 @@ const articles = [
      date: "March 17, 2025", 
      tags: ["roxette", "1988", "pop", "album review"] },
     {title: "Hoshimachi Suisei - NEXT COLOR PLANET", url: "Articles/Suisei_Next_Colour_Planet.html",
-        image: "images/Hoshimachi-Suisei-NEXT-COLOR-PLANET.jpg",
+        image: "images/Suisei-NEXT-COLOR-PLANET.jpg",
         date: "March 17, 2025",
         tags: ["Hoshimachi Suisei", "星街すいせい", "2020", "J-Pop", "single review", "music review"]
     }
