@@ -12,7 +12,7 @@ function loadArticles() {
         const articleCard = `
             <div class="article-card">
                 <a href="${article.url}">
-                    <img src="${article.image}" alt="${article.title}">
+                    <img src="${article.image}" alt="${article.title}" class="article-image">
                     <h3>${article.title}</h3>
                     <p class="article-date">📅 ${article.date}</p>
                 </a>
