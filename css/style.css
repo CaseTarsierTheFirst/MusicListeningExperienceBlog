@@ -1,134 +1,116 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body Styling */
+/* Global Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
     color: #333;
-    line-height: 1.6;
-    padding: 20px;
-}
-
-/* Main Container */
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Header */
-header {
-    text-align: center;
-    background: #333;
-    color: white;
-    padding: 20px 0;
-    border-radius: 8px 8px 0 0;
-}
-
-header h1 {
-    font-size: 30px;
 }
 
 /* Navigation Bar */
-nav {
+header {
+    background-color: #222;
+    color: white;
+    padding: 15px 0;
     text-align: center;
-    margin: 20px 0;
 }
 
-nav a {
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
     text-decoration: none;
-    color: #333;
-    padding: 10px 15px;
-    background: #e6e6e6;
-    border-radius: 5px;
-    margin: 5px;
-    transition: background 0.3s;
+    font-size: 18px;
 }
 
-nav a:hover {
-    background: #bbb;
-}
-
-/* Main Content */
-main {
-    padding: 20px;
-}
-
-/* Articles Grid */
-.articles-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-/* Article Cards */
-.article-card {
-    width: 250px;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+/* Banner Section */
+.banner {
+    background-image: url('../images/banner.jpg'); /* Ensure this image exists */
+    background-size: cover;
     text-align: center;
-    transition: transform 0.2s ease-in-out;
+    color: white;
+    padding: 100px 0;
 }
 
-.article-card:hover {
+.banner h2 {
+    font-size: 36px;
+    margin: 0;
+}
+
+.banner p {
+    font-size: 20px;
+}
+
+/* Articles Section */
+.articles {
+    padding: 40px;
+    text-align: center;
+}
+
+.article-list {
+    display: flex;
+    flex-wrap: wrap;  /* Makes it responsive */
+    justify-content: center;
+    gap: 20px;
+}
+
+.article {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 30%;
+    min-width: 250px;  /* Prevents articles from being too small */
+    transition: transform 0.3s ease;
+}
+
+.article:hover {
     transform: scale(1.05);
 }
 
-.article-card img {
-    width: 100%;
-    height: auto; /* Ensure image keeps aspect ratio */
-    max-height: 180px; /* Limit the height */
-    border-radius: 8px;
-    object-fit: cover; /* Ensures the image fits within the container */
+.article h3 a {
+    text-decoration: none;
+    color: #222;
 }
 
-.article-card h3 {
-    font-size: 18px;
-    margin: 10px 0;
-}
-
-.article-date {
-    font-size: 14px;
-    color: #777;
+.article p {
+    font-size: 16px;
+    color: #555;
 }
 
 /* Footer */
 footer {
+    background-color: #222;
+    color: white;
     text-align: center;
-    font-size: 14px;
-    color: #666;
-    padding: 20px;
+    padding: 15px 0;
     margin-top: 20px;
-    background: #333;
-    color: white;
-    border-radius: 0 0 8px 8px;
 }
 
-/* Stylized Buttons */
-.button {
-    display: inline-block;
-    padding: 12px 20px;
-    background-color: #333;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-    text-align: center;
-    transition: background 0.3s, transform 0.2s;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .article-list {
+        flex-direction: column; /* Stacks articles on smaller screens */
+        align-items: center;
+    }
+    
+    .article {
+        width: 90%; /* Full width on smaller screens */
+    }
 
-.button:hover {
-    background-color: #555;
-    transform: scale(1.05);
+    .banner h2 {
+        font-size: 28px;
+    }
+
+    .banner p {
+        font-size: 18px;
+    }
 }
