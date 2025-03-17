@@ -57,47 +57,45 @@ nav a:hover {
     background: #bbb;
 }
 
-/* Main Content */
+/* Article Styling */
 main {
     padding: 20px;
 }
 
-/* Articles Grid */
-.articles-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-/* Article Cards */
-.article-card {
-    width: 250px;
-    background: white;
-    padding: 15px;
+/* Image Styling */
+.album-cover {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
     border-radius: 10px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+/* Article Header */
+.article-header {
     text-align: center;
-    transition: transform 0.2s ease-in-out;
 }
 
-.article-card:hover {
-    transform: scale(1.05);
-}
-
-.article-card img {
-    width: 100%;
-    border-radius: 8px;
-}
-
-.article-card h3 {
-    font-size: 18px;
-    margin: 10px 0;
-}
-
-.article-date {
+.article-meta {
     font-size: 14px;
     color: #777;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 20px;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+/* Lists */
+ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+ol li {
+    font-size: 16px;
 }
 
 /* Footer */
