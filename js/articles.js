@@ -1,15 +1,15 @@
 // List of articles with tags (add new ones here)
 const articles = [
-    { title: "Roxette - Look Sharp!", url: "Articles/Roxette_Look_Sharp!.html", 
-     image: "images/roxettelooksharp.jpg", 
-     date: "March 17, 2025", 
-     tags: ["roxette", "1988", "pop", "album review"] },
     {title: "Hoshimachi Suisei - NEXT COLOR PLANET", url: "Articles/Suisei_Next_Colour_Planet.html",
         image: "images/Suisei-NEXT-COLOR-PLANET.jpg",
         date: "March 17, 2025",
         tags: ["Hoshimachi Suisei", "星街すいせい", "2020", "J-Pop", "single review", "music review"]
-    }
+    },
 
+    { title: "Roxette - Look Sharp!", url: "Articles/Roxette_Look_Sharp!.html", 
+     image: "images/roxettelooksharp.jpg", 
+     date: "March 17, 2025", 
+     tags: ["roxette", "1988", "pop", "album review"] }
 ];
 
 // Function to generate article cards
