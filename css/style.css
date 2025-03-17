@@ -38,7 +38,7 @@ header h1 {
 }
 
 header p {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 /* Navigation Bar */
@@ -66,23 +66,24 @@ main {
     padding: 20px;
 }
 
-/* Latest Articles Section */
-#articles-grid {
+/* Articles Grid */
+.articles-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
 }
 
+/* Article Cards */
 .article-card {
-    width: 250px;  /* Fixed width for the article cards */
+    width: 250px;
     background: white;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.2s ease-in-out;
-    overflow: hidden;
+    flex-shrink: 0;
 }
 
 .article-card:hover {
@@ -90,10 +91,12 @@ main {
 }
 
 .article-card img {
-    width: 100%;  /* Ensures the image spans the full width of the card */
-    height: 200px;  /* Adjust height as per your needs */
-    object-fit: cover;  /* Ensures the image covers the area without stretching */
+    width: 100%;
+    height: auto;
+    max-width: 400px; /* Max size for images */
+    max-height: 400px; /* Max height for images */
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .article-card h3 {
@@ -101,23 +104,9 @@ main {
     margin: 10px 0;
 }
 
-.article-card p {
+.article-date {
     font-size: 14px;
-    margin-bottom: 15px;
-    color: #555;
-}
-
-.article-card .read-more {
-    text-decoration: none;
-    color: #333;
-    padding: 8px 15px;
-    background: #f1f1f1;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
-
-.article-card .read-more:hover {
-    background: #ddd;
+    color: #777;
 }
 
 /* Footer */
