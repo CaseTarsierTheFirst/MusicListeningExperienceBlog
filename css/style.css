@@ -1,9 +1,13 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap');
+
 /* General styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    color: #333;
 }
 
 .container {
@@ -15,6 +19,7 @@ body {
 header {
     text-align: center;
     margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 nav {
@@ -26,6 +31,7 @@ nav a {
     margin: 0 10px;
     text-decoration: none;
     color: #333;
+    font-weight: 600;
 }
 
 nav a:hover {
@@ -51,6 +57,7 @@ article {
 
 h2, h3 {
     color: #333;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Image centering */
@@ -63,6 +70,7 @@ h2, h3 {
     display: inline-block;  /* Ensures the image behaves like a block element but stays inline */
     width: 400px;  /* Image width */
     height: 400px; /* Image height */
+    border-radius: 10px; /* Adds soft rounded corners */
 }
 
 /* Grid for latest articles */
@@ -115,6 +123,7 @@ h2, h3 {
     width: 300px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    font-family: 'Poppins', sans-serif;
 }
 
 .search-container button {
@@ -124,6 +133,7 @@ h2, h3 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: 600;
 }
 
 .search-container button:hover {
