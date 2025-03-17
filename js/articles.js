@@ -5,6 +5,7 @@ const articles = [
 
 // Function to generate article cards
 function loadArticles() {
+    console.log("Articles are being loaded...")
     const container = document.getElementById("articles-grid");
     container.innerHTML = ""; // Clear existing content
 
