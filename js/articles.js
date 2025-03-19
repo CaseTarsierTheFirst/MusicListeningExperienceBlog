@@ -12,30 +12,29 @@ const articles = [
      tags: ["roxette", "1988", "pop", "album review"] }
 ];
 
-// Function to generate article cards
+// Function to load articles dynamically for homepage
 function loadArticles() {
     const container = document.getElementById("articles-grid");
-    container.innerHTML = ""; // Clear existing content
+    container.innerHTML = ""; // Clear content
 
-    const searchInput = document.getElementById("search-input").value.toLowerCase();
-    const filteredArticles = articles.filter(article => 
-        article.tags.some(tag => tag.toLowerCase().includes(searchInput))
-    );
-
-    filteredArticles.forEach(article => {
+    articles.forEach(article => {
         const articleCard = `
             <div class="article-card">
-                <a href="${article.url}">
+                <a href="article.html?file=${encodeURIComponent(article.file)}">
                     <img src="${article.image}" alt="${article.title}">
                     <h3>${article.title}</h3>
                     <p class="article-date">📅 ${article.date}</p>
-                    <p class="article-tags">Tags: ${article.tags.join(", ")}</p>
+                    <div class="article-tags">
+                        ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join(" ")}
+                    </div>
                 </a>
             </div>
         `;
         container.innerHTML += articleCard;
     });
 }
+
+document.addEventListener("DOMContentLoaded", loadArticles);
 
 // Run on page load
 document.addEventListener("DOMContentLoaded", loadArticles);
