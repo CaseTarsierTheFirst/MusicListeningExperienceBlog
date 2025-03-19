@@ -1,18 +1,19 @@
 const articles = [
-    { 
-        title: "Roxette - Look Sharp! (1988)",
-        file: "Roxette_Look_Sharp!.html",  // ✅ Points to an HTML file instead of JSON
-        image: "images/roxettelooksharp.jpg",
-        date: "March 17, 2025",
-        tags: ["Roxette", "Look Sharp!", "pop rock", "1988", "music review"]
-    },
-
+    
     { 
         title: "Hoshimachi Suisei - NEXT COLOR PLANET",
         file: "Suisei_Next_Colour_Planet.html",  // ✅ Points to an HTML file
         image: "images/Suisei-NEXT-COLOR-PLANET.jpg",
         date: "March 17, 2025",
         tags: ["Hoshimachi Suisei", "J-Pop", "2020", "single review", "music review"]
+    },
+    
+    { 
+        title: "Roxette - Look Sharp! (1988)",
+        file: "Roxette_Look_Sharp!.html",  // ✅ Points to an HTML file instead of JSON
+        image: "images/roxettelooksharp.jpg",
+        date: "March 17, 2025",
+        tags: ["Roxette", "Look Sharp!", "pop rock", "1988", "music review"]
     }
 ];
 
