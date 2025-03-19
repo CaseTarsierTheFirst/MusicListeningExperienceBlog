@@ -8,18 +8,25 @@
 </head>
 <body>
     <div class="container">
-        <div id="article-container">
-            <h2>Loading article...</h2>
-        </div>
-            <!-- ✅ Navigation Menu -->
+        <!-- ✅ Header -->
+        <header>
+            <h1>📰 Music Blog</h1>
+        </header>
+
+        <!-- ✅ Navigation Menu -->
         <nav>
             <a href="index.html">🏠 Home</a>
             <a href="articles.html">📚 All Articles</a>
             <a href="about.html">ℹ️ About</a>
         </nav>
+
+        <!-- ✅ Article Content -->
+        <div id="article-container" class="article-container">
+            <h2>Loading article...</h2>
+        </div>
     </div>
 
-    <!-- ✅ Correct Firebase CDN -->
+    <!-- ✅ Firebase Setup -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
@@ -35,7 +42,6 @@
             measurementId: "G-08L6QGVVWD"
         };
 
-        // ✅ Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         var db = firebase.firestore();
         console.log("✅ Firebase Initialized Successfully");
