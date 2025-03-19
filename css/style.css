@@ -139,3 +139,37 @@ h2, h3 {
 .search-container button:hover {
     background-color: #0056b3;
 }
+
+/* Like/Dislike Button Styles */
+.like-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.like-button, .dislike-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dislike-button {
+    background-color: #FF3B3B;
+}
+
+.like-button:hover {
+    background-color: #0056b3;
+}
+
+.dislike-button:hover {
+    background-color: #CC0000;
+}
+
+.like-count, .dislike-count {
+    font-size: 16px;
+    font-weight: bold;
+}
