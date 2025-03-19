@@ -13,25 +13,7 @@
         </div>
     </div>
 
-    <!-- ✅ Include Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
-
     <script>
-        // ✅ Replace with your actual Firebase config
-        const firebaseConfig = {
-            apiKey: "AIzaSyAjI5WHUf1X9qlNL2Rz3X1IBtuKYLpmnUQ",
-            authDomain: "music-blog-vote-analytics.firebaseapp.com",
-            projectId: "music-blog-vote-analytics",
-            storageBucket: "music-blog-vote-analytics.firebasestorage.app",
-            messagingSenderId: "523192826653",
-            appId: "1:523192826653:web:b7342df41bc6d0d9e1bff4",
-            measurementId: "G-08L6QGVVWD"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
         function loadArticle() {
             const params = new URLSearchParams(window.location.search);
             const file = params.get("file");
@@ -41,6 +23,7 @@
                 return;
             }
 
+            // Fetch the article HTML content
             fetch(`articles/${file}`)
                 .then(response => {
                     if (!response.ok) {
@@ -52,7 +35,7 @@
                     const articleContainer = document.getElementById("article-container");
                     articleContainer.innerHTML = html;
 
-                    // ✅ Inject Like/Dislike buttons dynamically
+                    // Inject Like/Dislike buttons dynamically
                     const likeDislikeContainer = document.createElement("div");
                     likeDislikeContainer.classList.add("like-container");
                     likeDislikeContainer.innerHTML = `
@@ -64,7 +47,7 @@
 
                     articleContainer.appendChild(likeDislikeContainer);
 
-                    setupLikeDislikeSystem(file);
+                    setupLikeButtons(file);
                 })
                 .catch(error => {
                     document.getElementById("article-container").innerHTML = "<h2>Error loading article</h2>";
@@ -72,55 +55,77 @@
                 });
         }
 
-        function setupLikeDislikeSystem(file) {
+        function setupLikeButtons(file) {
             const likeButton = document.querySelector(".like-button");
             const dislikeButton = document.querySelector(".dislike-button");
             const likeCount = document.querySelector(".like-count");
             const dislikeCount = document.querySelector(".dislike-count");
 
-            const docRef = db.collection("articles").doc(file);
+            // Unique keys per article
+            const likeKey = `likes-${file}`;
+            const dislikeKey = `dislikes-${file}`;
+            const voteKey = `vote-${file}`;
 
-            // ✅ Fetch likes/dislikes from Firebase
-            docRef.get().then(doc => {
-                if (doc.exists) {
-                    likeCount.textContent = doc.data().likes || 0;
-                    dislikeCount.textContent = doc.data().dislikes || 0;
+            // Load stored values
+            likeCount.textContent = localStorage.getItem(likeKey) || 0;
+            dislikeCount.textContent = localStorage.getItem(dislikeKey) || 0;
+            let userVote = localStorage.getItem(voteKey);
+
+            // Set button states
+            updateButtonStyles(userVote);
+
+            likeButton.addEventListener("click", function () {
+                if (userVote === "liked") {
+                    // Remove like
+                    likeCount.textContent = Math.max(0, parseInt(likeCount.textContent) - 1);
+                    localStorage.setItem(likeKey, likeCount.textContent);
+                    localStorage.removeItem(voteKey);
+                    userVote = null;
                 } else {
-                    docRef.set({ likes: 0, dislikes: 0 });
+                    // Add like, remove dislike if needed
+                    likeCount.textContent = parseInt(likeCount.textContent) + 1;
+                    localStorage.setItem(likeKey, likeCount.textContent);
+                    
+                    if (userVote === "disliked") {
+                        dislikeCount.textContent = Math.max(0, parseInt(dislikeCount.textContent) - 1);
+                        localStorage.setItem(dislikeKey, dislikeCount.textContent);
+                    }
+
+                    localStorage.setItem(voteKey, "liked");
+                    userVote = "liked";
                 }
+                updateButtonStyles(userVote);
             });
 
-            // ✅ Like button logic
-            likeButton.addEventListener("click", () => {
-                db.runTransaction(transaction => {
-                    return transaction.get(docRef).then(doc => {
-                        if (!doc.exists) return;
-                        let newLikes = (doc.data().likes || 0) + 1;
-                        transaction.update(docRef, { likes: newLikes });
-                        likeCount.textContent = newLikes;
-                    });
-                });
-            });
+            dislikeButton.addEventListener("click", function () {
+                if (userVote === "disliked") {
+                    // Remove dislike
+                    dislikeCount.textContent = Math.max(0, parseInt(dislikeCount.textContent) - 1);
+                    localStorage.setItem(dislikeKey, dislikeCount.textContent);
+                    localStorage.removeItem(voteKey);
+                    userVote = null;
+                } else {
+                    // Add dislike, remove like if needed
+                    dislikeCount.textContent = parseInt(dislikeCount.textContent) + 1;
+                    localStorage.setItem(dislikeKey, dislikeCount.textContent);
+                    
+                    if (userVote === "liked") {
+                        likeCount.textContent = Math.max(0, parseInt(likeCount.textContent) - 1);
+                        localStorage.setItem(likeKey, likeCount.textContent);
+                    }
 
-            // ✅ Dislike button logic
-            dislikeButton.addEventListener("click", () => {
-                db.runTransaction(transaction => {
-                    return transaction.get(docRef).then(doc => {
-                        if (!doc.exists) return;
-                        let newDislikes = (doc.data().dislikes || 0) + 1;
-                        transaction.update(docRef, { dislikes: newDislikes });
-                        dislikeCount.textContent = newDislikes;
-                    });
-                });
-            });
-
-            // ✅ Listen for real-time updates
-            docRef.onSnapshot(doc => {
-                if (doc.exists) {
-                    likeCount.textContent = doc.data().likes || 0;
-                    dislikeCount.textContent = doc.data().dislikes || 0;
+                    localStorage.setItem(voteKey, "disliked");
+                    userVote = "disliked";
                 }
+                updateButtonStyles(userVote);
             });
+
+            function updateButtonStyles(vote) {
+                likeButton.style.backgroundColor = vote === "liked" ? "#0056b3" : "#007BFF";
+                dislikeButton.style.backgroundColor = vote === "disliked" ? "#CC0000" : "#FF3B3B";
+                likeButton.style.opacity = vote === "liked" ? "1" : "0.7";
+                dislikeButton.style.opacity = vote === "disliked" ? "1" : "0.7";
+            }
         }
 
         document.addEventListener("DOMContentLoaded", loadArticle);
