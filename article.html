@@ -13,12 +13,7 @@
         </div>
     </div>
 
-    <!-- ✅ Clear Vote Button -->
-    <div class="reset-container">
-        <button onclick="resetLocalVotes()">🧹 Reset My Vote</button>
-    </div>
-
-    <!-- ✅ Firebase SDK (Version 8 for compatibility) -->
+    <!-- ✅ Correct Firebase CDN -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
@@ -92,15 +87,15 @@
 
             const docRef = db.collection("articles").doc(file);
 
-            // ✅ Fetch likes/dislikes from Firestore (Case-Sensitive: Uses "Likes" & "Dislikes")
+            // ✅ Fetch likes/dislikes from Firestore
             docRef.get().then(doc => {
                 if (doc.exists) {
                     console.log("✅ Fetched document:", doc.data());
-                    likeCount.textContent = doc.data().Likes || 0;
-                    dislikeCount.textContent = doc.data().Dislikes || 0;
+                    likeCount.textContent = doc.data().likes || 0;
+                    dislikeCount.textContent = doc.data().dislikes || 0;
                 } else {
                     console.warn("⚠️ Document does not exist! Creating one.");
-                    docRef.set({ Likes: 0, Dislikes: 0 });
+                    docRef.set({ likes: 0, dislikes: 0 });
                 }
             }).catch(error => {
                 console.error("❌ Error fetching Firestore data:", error);
@@ -110,8 +105,8 @@
             let userVote = localStorage.getItem(`vote-${file}`);
             updateButtonStyles(userVote);
 
-            likeButton.addEventListener("click", () => handleVote("Liked"));
-            dislikeButton.addEventListener("click", () => handleVote("Disliked"));
+            likeButton.addEventListener("click", () => handleVote("liked"));
+            dislikeButton.addEventListener("click", () => handleVote("disliked"));
 
             function handleVote(type) {
                 if (userVote === type) {
@@ -120,10 +115,10 @@
                         return transaction.get(docRef).then(doc => {
                             if (!doc.exists) return;
                             let updateData = {};
-                            updateData[type] = Math.max(0, (doc.data()[type] || 0) - 1);
+                            updateData[type === "liked" ? "likes" : "dislikes"] = Math.max(0, (doc.data()[type === "liked" ? "likes" : "dislikes"] || 0) - 1);
                             transaction.update(docRef, updateData);
-                            likeCount.textContent = updateData.Likes || likeCount.textContent;
-                            dislikeCount.textContent = updateData.Dislikes || dislikeCount.textContent;
+                            likeCount.textContent = updateData.likes || likeCount.textContent;
+                            dislikeCount.textContent = updateData.dislikes || dislikeCount.textContent;
                             localStorage.removeItem(`vote-${file}`);
                             userVote = null;
                             updateButtonStyles(null);
@@ -135,13 +130,13 @@
                         return transaction.get(docRef).then(doc => {
                             if (!doc.exists) return;
                             let updateData = {};
-                            updateData[type] = (doc.data()[type] || 0) + 1;
+                            updateData[type === "liked" ? "likes" : "dislikes"] = (doc.data()[type === "liked" ? "likes" : "dislikes"] || 0) + 1;
                             if (userVote) {
-                                updateData[userVote] = Math.max(0, (doc.data()[userVote] || 0) - 1);
+                                updateData[userVote === "liked" ? "likes" : "dislikes"] = Math.max(0, (doc.data()[userVote === "liked" ? "likes" : "dislikes"] || 0) - 1);
                             }
                             transaction.update(docRef, updateData);
-                            likeCount.textContent = updateData.Likes || likeCount.textContent;
-                            dislikeCount.textContent = updateData.Dislikes || dislikeCount.textContent;
+                            likeCount.textContent = updateData.likes || likeCount.textContent;
+                            dislikeCount.textContent = updateData.dislikes || dislikeCount.textContent;
                             localStorage.setItem(`vote-${file}`, type);
                             userVote = type;
                             updateButtonStyles(type);
@@ -151,44 +146,18 @@
             }
 
             function updateButtonStyles(vote) {
-                likeButton.style.backgroundColor = vote === "Liked" ? "#0056b3" : "#007BFF";
-                dislikeButton.style.backgroundColor = vote === "Disliked" ? "#CC0000" : "#FF3B3B";
-                likeButton.style.opacity = vote === "Liked" ? "1" : "0.7";
-                dislikeButton.style.opacity = vote === "Disliked" ? "1" : "0.7";
+                likeButton.style.backgroundColor = vote === "liked" ? "#0056b3" : "#007BFF";
+                dislikeButton.style.backgroundColor = vote === "disliked" ? "#CC0000" : "#FF3B3B";
+                likeButton.style.opacity = vote === "liked" ? "1" : "0.7";
+                dislikeButton.style.opacity = vote === "disliked" ? "1" : "0.7";
             }
 
             // ✅ Real-time updates from Firestore
             docRef.onSnapshot(doc => {
                 if (doc.exists) {
-                    likeCount.textContent = doc.data().Likes || 0;
-                    dislikeCount.textContent = doc.data().Dislikes || 0;
+                    likeCount.textContent = doc.data().likes || 0;
+                    dislikeCount.textContent = doc.data().dislikes || 0;
                 }
-            });
-        }
-
-        // ✅ Function to Clear Local Votes and Reset Firebase Votes
-        function resetLocalVotes() {
-            const params = new URLSearchParams(window.location.search);
-            const file = params.get("file");
-
-            if (!file) {
-                alert("⚠️ No article detected!");
-                return;
-            }
-
-            localStorage.removeItem(`vote-${file}`);
-
-            const docRef = db.collection("articles").doc(file);
-            docRef.update({
-                Likes: 0,
-                Dislikes: 0
-            }).then(() => {
-                console.log("✅ Votes reset in Firestore!");
-                alert("🧹 All votes reset! Refreshing...");
-                location.reload();
-            }).catch(error => {
-                console.error("❌ Error resetting votes:", error);
-                alert("⚠️ Failed to reset votes. Check the console for errors.");
             });
         }
 
