@@ -14,7 +14,6 @@
     </div>
 
     <script>
-        // Function to load an article dynamically
         function loadArticle() {
             const params = new URLSearchParams(window.location.search);
             const file = params.get("file");
@@ -24,30 +23,48 @@
                 return;
             }
 
-            fetch(`data/${file}`)
-                .then(response => response.json())
-                .then(article => {
-                    document.getElementById("article-container").innerHTML = `
-                        <header>
-                            <h1>${article.title}</h1>
-                            <p class="article-meta">📅 Published on: ${article.date}</p>
-                        </header>
+            // Fetch the article HTML content
+            fetch(`articles/${file}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Article not found");
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const articleContainer = document.getElementById("article-container");
+                    articleContainer.innerHTML = html;
 
-                        <div class="image-wrapper">
-                            <img src="${article.image}" alt="${article.title}" width="400" height="400">
-                        </div>
-
-                        <div class="article-tags">
-                            ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join(" ")}
-                        </div>
-
-                        ${article.content}
+                    // Inject Like/Dislike buttons dynamically
+                    const likeDislikeContainer = document.createElement("div");
+                    likeDislikeContainer.classList.add("like-container");
+                    likeDislikeContainer.innerHTML = `
+                        <button class="like-button">👍 Like</button>
+                        <span class="like-count">0</span>
+                        <button class="dislike-button">👎 Dislike</button>
+                        <span class="dislike-count">0</span>
                     `;
+
+                    articleContainer.appendChild(likeDislikeContainer);
+
+                    setupLikeButtons(); // Call function to enable Like/Dislike functionality
                 })
                 .catch(error => {
                     document.getElementById("article-container").innerHTML = "<h2>Error loading article</h2>";
                     console.error("Error:", error);
                 });
+        }
+
+        function setupLikeButtons() {
+            document.querySelector(".like-button").addEventListener("click", function () {
+                let count = this.nextElementSibling;
+                count.textContent = parseInt(count.textContent) + 1;
+            });
+
+            document.querySelector(".dislike-button").addEventListener("click", function () {
+                let count = this.nextElementSibling;
+                count.textContent = parseInt(count.textContent) + 1;
+            });
         }
 
         document.addEventListener("DOMContentLoaded", loadArticle);

@@ -1,19 +1,18 @@
-// List of articles (metadata only)
 const articles = [
     { 
-        title: "Hoshimachi Suisei - NEXT COLOR PLANET", 
-        file: "hoshimachi_suisei_next_color_planet.json",  // Correct JSON reference
-        image: "images/Suisei-NEXT-COLOR-PLANET.jpg",
+        title: "Roxette - Look Sharp! (1988)",
+        file: "Roxette_Look_Sharp!.html",  // ✅ Points to an HTML file instead of JSON
+        image: "images/roxettelooksharp.jpg",
         date: "March 17, 2025",
-        tags: ["Hoshimachi Suisei", "星街すいせい", "2020", "J-Pop", "single review", "music review"]
+        tags: ["Roxette", "Look Sharp!", "pop rock", "1988", "music review"]
     },
 
     { 
-        title: "Roxette - Look Sharp!", 
-        file: "Roxette_Look_Sharp!.json",  // Correct JSON reference
-        image: "images/roxettelooksharp.jpg",
+        title: "Hoshimachi Suisei - NEXT COLOR PLANET",
+        file: "Suisei_Next_Colour_Planet.html",  // ✅ Points to an HTML file
+        image: "images/Hoshimachi-Suisei-NEXT-COLOR-PLANET.jpg",
         date: "March 17, 2025",
-        tags: ["roxette", "1988", "pop", "album review"]
+        tags: ["Hoshimachi Suisei", "J-Pop", "2020", "single review", "music review"]
     }
 ];
 
@@ -39,8 +38,8 @@ function loadArticles() {
     });
 }
 
-// Run on page load
 document.addEventListener("DOMContentLoaded", loadArticles);
+
 
 // Function to search articles based on the search input
 function searchArticles() {
