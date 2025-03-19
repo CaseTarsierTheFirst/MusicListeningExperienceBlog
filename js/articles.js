@@ -1,15 +1,20 @@
-// List of articles with tags (add new ones here)
+// List of articles (metadata only)
 const articles = [
-    {title: "Hoshimachi Suisei - NEXT COLOR PLANET", url: "Articles/Suisei_Next_Colour_Planet.html",
+    { 
+        title: "Hoshimachi Suisei - NEXT COLOR PLANET", 
+        file: "hoshimachi_suisei_next_color_planet.json",  // Correct JSON reference
         image: "images/Suisei-NEXT-COLOR-PLANET.jpg",
         date: "March 17, 2025",
         tags: ["Hoshimachi Suisei", "星街すいせい", "2020", "J-Pop", "single review", "music review"]
     },
 
-    { title: "Roxette - Look Sharp!", url: "Roxette_Look_Sharp!.json", 
-     image: "images/roxettelooksharp.jpg", 
-     date: "March 17, 2025", 
-     tags: ["roxette", "1988", "pop", "album review"] }
+    { 
+        title: "Roxette - Look Sharp!", 
+        file: "roxette_look_sharp.json",  // Correct JSON reference
+        image: "images/roxettelooksharp.jpg",
+        date: "March 17, 2025",
+        tags: ["roxette", "1988", "pop", "album review"]
+    }
 ];
 
 // Function to load articles dynamically for homepage
@@ -33,8 +38,6 @@ function loadArticles() {
         container.innerHTML += articleCard;
     });
 }
-
-document.addEventListener("DOMContentLoaded", loadArticles);
 
 // Run on page load
 document.addEventListener("DOMContentLoaded", loadArticles);
