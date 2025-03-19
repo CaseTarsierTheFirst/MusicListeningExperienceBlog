@@ -145,6 +145,7 @@ h2, h3 {
     display: flex;
     gap: 10px;
     margin-top: 20px;
+    align-items: center;
 }
 
 .like-button, .dislike-button {
@@ -155,18 +156,24 @@ h2, h3 {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: background 0.3s ease;
 }
 
 .dislike-button {
     background-color: #FF3B3B;
 }
 
-.like-button:hover {
+.like-button:hover:not(:disabled) {
     background-color: #0056b3;
 }
 
-.dislike-button:hover {
+.dislike-button:hover:not(:disabled) {
     background-color: #CC0000;
+}
+
+.like-button:disabled, .dislike-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .like-count, .dislike-count {
