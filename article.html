@@ -13,12 +13,12 @@
         </div>
     </div>
 
-    <!-- ✅ Include Firebase -->
+    <!-- ✅ Correct Firebase CDN (Latest Version) -->
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
 
     <script>
-        // ✅ Firebase Configuration (Replace with your credentials)
+        // ✅ Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAjI5WHUf1X9qlNL2Rz3X1IBtuKYLpmnUQ",
             authDomain: "music-blog-vote-analytics.firebaseapp.com",
@@ -29,12 +29,16 @@
             measurementId: "G-08L6QGVVWD"
         };
 
+        // ✅ Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        console.log("✅ Firebase Initialized Successfully");
 
         function loadArticle() {
             const params = new URLSearchParams(window.location.search);
             const file = params.get("file");
+
+            console.log("🔍 Fetching article:", file);
 
             if (!file) {
                 document.getElementById("article-container").innerHTML = "<h2>Article Not Found</h2>";
@@ -43,12 +47,14 @@
 
             fetch(`articles/${file}`)
                 .then(response => {
+                    console.log("🔍 Fetch response:", response);
                     if (!response.ok) {
                         throw new Error("Article not found");
                     }
                     return response.text();
                 })
                 .then(html => {
+                    console.log("✅ Article loaded successfully.");
                     const articleContainer = document.getElementById("article-container");
                     articleContainer.innerHTML = html;
 
@@ -63,17 +69,16 @@
                     `;
 
                     articleContainer.appendChild(likeDislikeContainer);
-
                     setupLikeDislikeSystem(file);
                 })
                 .catch(error => {
                     document.getElementById("article-container").innerHTML = "<h2>Error loading article</h2>";
-                    console.error("Error:", error);
+                    console.error("❌ Error:", error);
                 });
         }
 
         function setupLikeDislikeSystem(file) {
-            console.log("Connecting to Firestore for:", file);
+            console.log("🔗 Connecting to Firestore for:", file);
 
             const likeButton = document.querySelector(".like-button");
             const dislikeButton = document.querySelector(".dislike-button");
@@ -85,15 +90,15 @@
             // ✅ Fetch likes/dislikes from Firestore
             docRef.get().then(doc => {
                 if (doc.exists) {
-                    console.log("Fetched document:", doc.data());
+                    console.log("✅ Fetched document:", doc.data());
                     likeCount.textContent = doc.data().likes || 0;
                     dislikeCount.textContent = doc.data().dislikes || 0;
                 } else {
-                    console.error("Document does not exist! Creating one.");
+                    console.warn("⚠️ Document does not exist! Creating one.");
                     docRef.set({ likes: 0, dislikes: 0 });
                 }
             }).catch(error => {
-                console.error("Error fetching Firestore data:", error);
+                console.error("❌ Error fetching Firestore data:", error);
             });
 
             // ✅ Like button logic
