@@ -1,49 +1,48 @@
-// List of articles (add new ones here)
 const articles = [
-    {
+    
+    { 
         title: "Hoshimachi Suisei - NEXT COLOR PLANET",
-        url: "Articles/Suisei_Next_Colour_Planet.html",
+        file: "Suisei_Next_Colour_Planet.html",  // ✅ Points to an HTML file
         image: "images/Suisei-NEXT-COLOR-PLANET.jpg",
         date: "March 17, 2025",
-        tags: ["J-Pop", "2020", "music review"]
+        tags: ["Hoshimachi Suisei", "J-Pop", "2020", "single review", "music review"]
     },
-
-    {
-        title: "Roxette - Look Sharp!",
-        url: "Articles/Roxette_Look_Sharp!.html",
+    
+    { 
+        title: "Roxette - Look Sharp! (1988)",
+        file: "Roxette_Look_Sharp!.html",  // ✅ Points to an HTML file instead of JSON
         image: "images/roxettelooksharp.jpg",
         date: "March 17, 2025",
-        tags: ["pop rock", "1988", "album review"]
+        tags: ["Roxette", "Look Sharp!", "pop rock", "1988", "music review"]
     }
-
 ];
 
-// Function to generate article cards
+// Function to load articles dynamically for homepage
 function loadArticles() {
     const container = document.getElementById("articles-grid");
-    container.innerHTML = ""; // Clear existing content
+    container.innerHTML = ""; // Clear content
 
     articles.forEach(article => {
-        const articleCard = document.createElement("div");
-        articleCard.classList.add("article-card");
-
-        // ✅ Create tag elements
-        const tagsHTML = article.tags
-            .map(tag => `<span>${tag}</span>`)
-            .join(" ");
-
-        articleCard.innerHTML = `
-            <a href="${article.url}">
-                <img src="${article.image}" alt="${article.title}">
-                <h3>${article.title}</h3>
-                <p class="article-date">📅 ${article.date}</p>
-                <div class="article-tags">${tagsHTML}</div>
-            </a>
+        const articleCard = `
+            <div class="article-card">
+                <a href="article.html?file=${encodeURIComponent(article.file)}">
+                    <img src="${article.image}" alt="${article.title}">
+                    <h3>${article.title}</h3>
+                    <p class="article-date">📅 ${article.date}</p>
+                    <div class="article-tags">
+                        ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join(" ")}
+                    </div>
+                </a>
+            </div>
         `;
-
-        container.appendChild(articleCard);
+        container.innerHTML += articleCard;
     });
 }
 
-// Run on page load
 document.addEventListener("DOMContentLoaded", loadArticles);
+
+
+// Function to search articles based on the search input
+function searchArticles() {
+    loadArticles(); // Re-run the loadArticles function whenever search input changes
+}
