@@ -13,14 +13,13 @@
         </div>
     </div>
 
-    <!-- ✅ Correct Firebase CDN (Latest Version) -->
+    <!-- ✅ Correct Firebase CDN -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    
 
     <script>
         // ✅ Firebase Configuration
-        const firebaseConfig = {
+        var firebaseConfig = {
             apiKey: "AIzaSyAjI5WHUf1X9qlNL2Rz3X1IBtuKYLpmnUQ",
             authDomain: "music-blog-vote-analytics.firebaseapp.com",
             projectId: "music-blog-vote-analytics",
@@ -102,45 +101,49 @@
                 console.error("❌ Error fetching Firestore data:", error);
             });
 
-            // ✅ Like button logic
-            likeButton.addEventListener("click", () => {
-                db.runTransaction(transaction => {
-                    return transaction.get(docRef).then(doc => {
-                        if (!doc.exists) return;
-                        let newLikes = (doc.data().likes || 0) + 1;
-                        let newDislikes = userVoted("disliked") ? (doc.data().dislikes || 0) - 1 : doc.data().dislikes;
-                        transaction.update(docRef, { likes: newLikes, dislikes: newDislikes });
-                        likeCount.textContent = newLikes;
-                        dislikeCount.textContent = newDislikes;
-                        setUserVote(file, "liked");
-                        updateButtonStyles("liked");
-                    });
-                });
-            });
+            // ✅ Load previous user vote from localStorage
+            let userVote = localStorage.getItem(`vote-${file}`);
+            updateButtonStyles(userVote);
 
-            // ✅ Dislike button logic
-            dislikeButton.addEventListener("click", () => {
-                db.runTransaction(transaction => {
-                    return transaction.get(docRef).then(doc => {
-                        if (!doc.exists) return;
-                        let newDislikes = (doc.data().dislikes || 0) + 1;
-                        let newLikes = userVoted("liked") ? (doc.data().likes || 0) - 1 : doc.data().likes;
-                        transaction.update(docRef, { dislikes: newDislikes, likes: newLikes });
-                        dislikeCount.textContent = newDislikes;
-                        likeCount.textContent = newLikes;
-                        setUserVote(file, "disliked");
-                        updateButtonStyles("disliked");
-                    });
-                });
-            });
+            likeButton.addEventListener("click", () => handleVote("liked"));
+            dislikeButton.addEventListener("click", () => handleVote("disliked"));
 
-            // ✅ Listen for real-time updates
-            docRef.onSnapshot(doc => {
-                if (doc.exists) {
-                    likeCount.textContent = doc.data().likes || 0;
-                    dislikeCount.textContent = doc.data().dislikes || 0;
+            function handleVote(type) {
+                if (userVote === type) {
+                    // ✅ Remove vote
+                    db.runTransaction(transaction => {
+                        return transaction.get(docRef).then(doc => {
+                            if (!doc.exists) return;
+                            let updateData = {};
+                            updateData[type === "liked" ? "likes" : "dislikes"] = Math.max(0, (doc.data()[type === "liked" ? "likes" : "dislikes"] || 0) - 1);
+                            transaction.update(docRef, updateData);
+                            likeCount.textContent = updateData.likes || likeCount.textContent;
+                            dislikeCount.textContent = updateData.dislikes || dislikeCount.textContent;
+                            localStorage.removeItem(`vote-${file}`);
+                            userVote = null;
+                            updateButtonStyles(null);
+                        });
+                    });
+                } else {
+                    // ✅ Add vote, remove opposite if needed
+                    db.runTransaction(transaction => {
+                        return transaction.get(docRef).then(doc => {
+                            if (!doc.exists) return;
+                            let updateData = {};
+                            updateData[type === "liked" ? "likes" : "dislikes"] = (doc.data()[type === "liked" ? "likes" : "dislikes"] || 0) + 1;
+                            if (userVote) {
+                                updateData[userVote === "liked" ? "likes" : "dislikes"] = Math.max(0, (doc.data()[userVote === "liked" ? "likes" : "dislikes"] || 0) - 1);
+                            }
+                            transaction.update(docRef, updateData);
+                            likeCount.textContent = updateData.likes || likeCount.textContent;
+                            dislikeCount.textContent = updateData.dislikes || dislikeCount.textContent;
+                            localStorage.setItem(`vote-${file}`, type);
+                            userVote = type;
+                            updateButtonStyles(type);
+                        });
+                    });
                 }
-            });
+            }
 
             function updateButtonStyles(vote) {
                 likeButton.style.backgroundColor = vote === "liked" ? "#0056b3" : "#007BFF";
@@ -149,13 +152,13 @@
                 dislikeButton.style.opacity = vote === "disliked" ? "1" : "0.7";
             }
 
-            function userVoted(type) {
-                return localStorage.getItem(`vote-${file}`) === type;
-            }
-
-            function setUserVote(file, type) {
-                localStorage.setItem(`vote-${file}`, type);
-            }
+            // ✅ Real-time updates from Firestore
+            docRef.onSnapshot(doc => {
+                if (doc.exists) {
+                    likeCount.textContent = doc.data().likes || 0;
+                    dislikeCount.textContent = doc.data().dislikes || 0;
+                }
+            });
         }
 
         document.addEventListener("DOMContentLoaded", loadArticle);
