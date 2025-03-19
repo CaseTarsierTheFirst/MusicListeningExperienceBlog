@@ -10,7 +10,7 @@ const articles = [
     { 
         title: "Hoshimachi Suisei - NEXT COLOR PLANET",
         file: "Suisei_Next_Colour_Planet.html",  // ✅ Points to an HTML file
-        image: "images/Hoshimachi-Suisei-NEXT-COLOR-PLANET.jpg",
+        image: "images/Suisei-NEXT-COLOR-PLANET.jpg",
         date: "March 17, 2025",
         tags: ["Hoshimachi Suisei", "J-Pop", "2020", "single review", "music review"]
     }
