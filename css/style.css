@@ -155,43 +155,6 @@ main {
     border-radius: 8px;
 }
 
-/* ✅ Like/Dislike Buttons */
-.like-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.like-button, .dislike-button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-}
-
-.like-button:hover {
-    background: #0056b3;
-}
-
-.dislike-button {
-    background-color: #FF3B3B;
-}
-
-.dislike-button:hover {
-    background: #CC0000;
-}
-
-.like-count, .dislike-count {
-    font-size: 16px;
-    color: #333;
-    font-weight: bold;
-}
-
 /* Footer */
 footer {
     text-align: center;
