@@ -136,6 +136,7 @@ main {
     border-radius: 8px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+    text-align: center; /* Centers all text and images inside the article */
 }
 
 .article-container h2, .article-container h3 {
@@ -145,13 +146,14 @@ main {
 
 .article-container p {
     margin-bottom: 15px;
+    text-align: justify;
 }
 
 .article-container img {
     display: block;
-    max-width: 100%;
+    max-width: 400px; /* Keeps images at a good size */
     height: auto;
-    margin: 0 auto;
+    margin: 20px auto; /* Centers image properly */
     border-radius: 8px;
 }
 
@@ -160,7 +162,7 @@ main {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 20px;
+    margin: 40px 0 20px; /* Added more spacing above the buttons */
 }
 
 .like-button, .dislike-button {
@@ -198,7 +200,7 @@ footer {
     font-size: 14px;
     color: #666;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 40px; /* Added more space between buttons and footer */
     background: #333;
     color: white;
     border-radius: 0 0 8px 8px;
