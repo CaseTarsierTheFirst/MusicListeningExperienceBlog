@@ -10,7 +10,7 @@ const articles = [
 
     { 
         title: "Roxette - Look Sharp!", 
-        file: "roxette_look_sharp.json",  // Correct JSON reference
+        file: "Roxette_Look_Sharp!.json",  // Correct JSON reference
         image: "images/roxettelooksharp.jpg",
         date: "March 17, 2025",
         tags: ["roxette", "1988", "pop", "album review"]
