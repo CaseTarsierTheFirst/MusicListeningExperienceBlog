@@ -1,116 +1,73 @@
-<script>
-    function loadArticle() {
-        const params = new URLSearchParams(window.location.search);
-        const file = params.get("file");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="article-container">
+            <h2>Loading article...</h2>
+        </div>
+    </div>
 
-        if (!file) {
-            document.getElementById("article-container").innerHTML = "<h2>Article Not Found</h2>";
-            return;
+    <script>
+        function loadArticle() {
+            const params = new URLSearchParams(window.location.search);
+            const file = params.get("file");
+
+            if (!file) {
+                document.getElementById("article-container").innerHTML = "<h2>Article Not Found</h2>";
+                return;
+            }
+
+            // Fetch the article HTML content
+            fetch(`articles/${file}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Article not found");
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const articleContainer = document.getElementById("article-container");
+                    articleContainer.innerHTML = html;
+
+                    // Inject Like/Dislike buttons dynamically
+                    const likeDislikeContainer = document.createElement("div");
+                    likeDislikeContainer.classList.add("like-container");
+                    likeDislikeContainer.innerHTML = `
+                        <button class="like-button">👍 Like</button>
+                        <span class="like-count">0</span>
+                        <button class="dislike-button">👎 Dislike</button>
+                        <span class="dislike-count">0</span>
+                    `;
+
+                    articleContainer.appendChild(likeDislikeContainer);
+
+                    setupLikeButtons(); // Call function to enable Like/Dislike functionality
+                })
+                .catch(error => {
+                    document.getElementById("article-container").innerHTML = "<h2>Error loading article</h2>";
+                    console.error("Error:", error);
+                });
         }
 
-        fetch(`articles/${file}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Article not found");
-                }
-                return response.text();
-            })
-            .then(html => {
-                const articleContainer = document.getElementById("article-container");
-                articleContainer.innerHTML = html;
-
-                // Inject Like/Dislike buttons dynamically
-                const likeDislikeContainer = document.createElement("div");
-                likeDislikeContainer.classList.add("like-container");
-                likeDislikeContainer.innerHTML = `
-                    <button class="like-button">👍 Like</button>
-                    <span class="like-count">0</span>
-                    <button class="dislike-button">👎 Dislike</button>
-                    <span class="dislike-count">0</span>
-                `;
-
-                articleContainer.appendChild(likeDislikeContainer);
-
-                setupLikeDislikeSystem(file);
-            })
-            .catch(error => {
-                document.getElementById("article-container").innerHTML = "<h2>Error loading article</h2>";
-                console.error("Error:", error);
+        function setupLikeButtons() {
+            document.querySelector(".like-button").addEventListener("click", function () {
+                let count = this.nextElementSibling;
+                count.textContent = parseInt(count.textContent) + 1;
             });
-    }
 
-    function setupLikeDislikeSystem(file) {
-        const likeButton = document.querySelector(".like-button");
-        const dislikeButton = document.querySelector(".dislike-button");
-        const likeCount = document.querySelector(".like-count");
-        const dislikeCount = document.querySelector(".dislike-count");
-
-        // Unique storage keys per article
-        const likeKey = `likes-${file}`;
-        const dislikeKey = `dislikes-${file}`;
-        const voteKey = `vote-${file}`;
-
-        // Load stored values
-        likeCount.textContent = localStorage.getItem(likeKey) || 0;
-        dislikeCount.textContent = localStorage.getItem(dislikeKey) || 0;
-        let userVote = localStorage.getItem(voteKey);
-
-        // Set button states
-        updateButtonStyles(userVote);
-
-        likeButton.addEventListener("click", function () {
-            if (userVote === "liked") {
-                // Remove like
-                likeCount.textContent = Math.max(0, parseInt(likeCount.textContent) - 1);
-                localStorage.setItem(likeKey, likeCount.textContent);
-                localStorage.removeItem(voteKey);
-                userVote = null;
-            } else {
-                // Add like, remove dislike if present
-                likeCount.textContent = parseInt(likeCount.textContent) + 1;
-                localStorage.setItem(likeKey, likeCount.textContent);
-                
-                if (userVote === "disliked") {
-                    dislikeCount.textContent = Math.max(0, parseInt(dislikeCount.textContent) - 1);
-                    localStorage.setItem(dislikeKey, dislikeCount.textContent);
-                }
-
-                localStorage.setItem(voteKey, "liked");
-                userVote = "liked";
-            }
-            updateButtonStyles(userVote);
-        });
-
-        dislikeButton.addEventListener("click", function () {
-            if (userVote === "disliked") {
-                // Remove dislike
-                dislikeCount.textContent = Math.max(0, parseInt(dislikeCount.textContent) - 1);
-                localStorage.setItem(dislikeKey, dislikeCount.textContent);
-                localStorage.removeItem(voteKey);
-                userVote = null;
-            } else {
-                // Add dislike, remove like if present
-                dislikeCount.textContent = parseInt(dislikeCount.textContent) + 1;
-                localStorage.setItem(dislikeKey, dislikeCount.textContent);
-                
-                if (userVote === "liked") {
-                    likeCount.textContent = Math.max(0, parseInt(likeCount.textContent) - 1);
-                    localStorage.setItem(likeKey, likeCount.textContent);
-                }
-
-                localStorage.setItem(voteKey, "disliked");
-                userVote = "disliked";
-            }
-            updateButtonStyles(userVote);
-        });
-
-        function updateButtonStyles(vote) {
-            likeButton.style.backgroundColor = vote === "liked" ? "#0056b3" : "#007BFF";
-            dislikeButton.style.backgroundColor = vote === "disliked" ? "#CC0000" : "#FF3B3B";
-            likeButton.style.opacity = vote === "liked" ? "1" : "0.7";
-            dislikeButton.style.opacity = vote === "disliked" ? "1" : "0.7";
+            document.querySelector(".dislike-button").addEventListener("click", function () {
+                let count = this.nextElementSibling;
+                count.textContent = parseInt(count.textContent) + 1;
+            });
         }
-    }
 
-    document.addEventListener("DOMContentLoaded", loadArticle);
-</script>
+        document.addEventListener("DOMContentLoaded", loadArticle);
+    </script>
+</body>
+</html>
