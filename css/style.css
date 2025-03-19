@@ -149,11 +149,17 @@ main {
     text-align: justify;
 }
 
-.article-container img {
-    display: block;
+/* ✅ Centered Image Styling */
+.centered-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+}
+
+.centered-image img {
     max-width: 400px;
     height: auto;
-    margin: 40px auto; /* Centers the image and adds spacing */
     border-radius: 8px;
 }
 
