@@ -8,25 +8,18 @@
 </head>
 <body>
     <div class="container">
-        <!-- ✅ Header -->
-        <header>
-            <h1>📰 Music Blog</h1>
-        </header>
-
-        <!-- ✅ Navigation Menu -->
+        <div id="article-container">
+            <h2>Loading article...</h2>
+        </div>
+            <!-- ✅ Navigation Menu -->
         <nav>
             <a href="index.html">🏠 Home</a>
             <a href="articles.html">📚 All Articles</a>
             <a href="about.html">ℹ️ About</a>
-        </nav>
-
-        <!-- ✅ Article Wrapper -->
-        <main id="article-container" class="article-container">
-            <h2>Loading article...</h2>
-        </main>
+    </nav>
     </div>
 
-    <!-- ✅ Firebase Setup -->
+    <!-- ✅ Correct Firebase CDN -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
@@ -42,12 +35,16 @@
             measurementId: "G-08L6QGVVWD"
         };
 
+        // ✅ Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         var db = firebase.firestore();
+        console.log("✅ Firebase Initialized Successfully");
 
         function loadArticle() {
             const params = new URLSearchParams(window.location.search);
             const file = params.get("file");
+
+            console.log("🔍 Fetching article:", file);
 
             if (!file) {
                 document.getElementById("article-container").innerHTML = "<h2>Article Not Found</h2>";
@@ -56,29 +53,28 @@
 
             fetch(`articles/${file}`)
                 .then(response => {
+                    console.log("🔍 Fetch response:", response);
                     if (!response.ok) {
                         throw new Error("Article not found");
                     }
                     return response.text();
                 })
                 .then(html => {
+                    console.log("✅ Article loaded successfully.");
                     const articleContainer = document.getElementById("article-container");
+                    articleContainer.innerHTML = html;
 
-                    // ✅ Instead of replacing the entire container, insert it inside
-                    articleContainer.innerHTML = `
-                        <article class="article-content">
-                            ${html}
-                        </article>
-
-                        <!-- ✅ Like/Dislike Buttons -->
-                        <div class="like-container">
-                            <button class="like-button">👍 Like</button>
-                            <span class="like-count">0</span>
-                            <button class="dislike-button">👎 Dislike</button>
-                            <span class="dislike-count">0</span>
-                        </div>
+                    // ✅ Inject Like/Dislike buttons dynamically
+                    const likeDislikeContainer = document.createElement("div");
+                    likeDislikeContainer.classList.add("like-container");
+                    likeDislikeContainer.innerHTML = `
+                        <button class="like-button">👍 Like</button>
+                        <span class="like-count">0</span>
+                        <button class="dislike-button">👎 Dislike</button>
+                        <span class="dislike-count">0</span>
                     `;
 
+                    articleContainer.appendChild(likeDislikeContainer);
                     setupLikeDislikeSystem(file);
                 })
                 .catch(error => {
@@ -88,6 +84,8 @@
         }
 
         function setupLikeDislikeSystem(file) {
+            console.log("🔗 Connecting to Firestore for:", file);
+
             const likeButton = document.querySelector(".like-button");
             const dislikeButton = document.querySelector(".dislike-button");
             const likeCount = document.querySelector(".like-count");
@@ -98,13 +96,18 @@
             // ✅ Fetch likes/dislikes from Firestore
             docRef.get().then(doc => {
                 if (doc.exists) {
+                    console.log("✅ Fetched document:", doc.data());
                     likeCount.textContent = doc.data().likes || 0;
                     dislikeCount.textContent = doc.data().dislikes || 0;
                 } else {
+                    console.warn("⚠️ Document does not exist! Creating one.");
                     docRef.set({ likes: 0, dislikes: 0 });
                 }
+            }).catch(error => {
+                console.error("❌ Error fetching Firestore data:", error);
             });
 
+            // ✅ Load previous user vote from localStorage
             let userVote = localStorage.getItem(`vote-${file}`);
             updateButtonStyles(userVote);
 
@@ -113,6 +116,7 @@
 
             function handleVote(type) {
                 if (userVote === type) {
+                    // ✅ Remove vote
                     db.runTransaction(transaction => {
                         return transaction.get(docRef).then(doc => {
                             if (!doc.exists) return;
@@ -127,6 +131,7 @@
                         });
                     });
                 } else {
+                    // ✅ Add vote, remove opposite if needed
                     db.runTransaction(transaction => {
                         return transaction.get(docRef).then(doc => {
                             if (!doc.exists) return;
