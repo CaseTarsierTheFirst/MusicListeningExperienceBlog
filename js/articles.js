@@ -6,7 +6,7 @@ const articles = [
         tags: ["Hoshimachi Suisei", "星街すいせい", "2020", "J-Pop", "single review", "music review"]
     },
 
-    { title: "Roxette - Look Sharp!", url: "Articles/Roxette_Look_Sharp!.html", 
+    { title: "Roxette - Look Sharp!", url: "Roxette_Look_Sharp!.json", 
      image: "images/roxettelooksharp.jpg", 
      date: "March 17, 2025", 
      tags: ["roxette", "1988", "pop", "album review"] }
