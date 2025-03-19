@@ -85,7 +85,7 @@
             const likeCount = document.querySelector(".like-count");
             const dislikeCount = document.querySelector(".dislike-count");
 
-            const docRef = db.collection("articles").doc(file);
+            const docRef = db.collection("Articles").doc(file);
 
             // ✅ Fetch likes/dislikes from Firestore
             docRef.get().then(doc => {
