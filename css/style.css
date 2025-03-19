@@ -129,6 +129,32 @@ main {
     cursor: pointer;
 }
 
+/* ✅ Article Page Styling */
+.article-container {
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.article-container h2, .article-container h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.article-container p {
+    margin-bottom: 15px;
+}
+
+.article-container img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
 /* Footer */
 footer {
     text-align: center;
