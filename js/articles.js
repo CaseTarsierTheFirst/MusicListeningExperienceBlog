@@ -1,4 +1,11 @@
 const articles = [
+    {
+        title: "Madonna - Like A Prayer (Deadpool & Wolverine)",
+        file: "Madonna_Like_A_Prayer_Single",
+        image: "images/D-W-LikeAPrayer.jpg",
+        date: "March 22, 2025",
+        tags: ["Madonna", "Deadpool & Wolverine", "2024", "single review", "music review", "pop music"]
+    },
     { 
         title: "Hoshimachi Suisei - NEXT COLOR PLANET",
         file: "Suisei_Next_Colour_Planet.html",
