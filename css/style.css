@@ -7,7 +7,7 @@
 
 /* Body Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
     color: #333;
     line-height: 1.6;
@@ -97,6 +97,12 @@ main {
 .article-card h3 {
     font-size: 18px;
     margin: 10px 0;
+    text-decoration: none;
+}
+
+.article-card a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .article-date {
