@@ -105,6 +105,7 @@ main {
     font-size: 18px;
     margin: 10px 0;
     text-decoration: none;
+    font-weight: normal;
 }
 
 .article-card a {
@@ -168,17 +169,18 @@ main {
     text-align: left;
     display: inline-block;
     margin: 0 auto 20px;
+    list-style-position: inside;
 }
 
 /* ✅ Centered Image Styling (Responsive) */
-.centered-image {
+.centered-image, .image-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 40px auto;
 }
 
-.centered-image img {
+.centered-image img, .image-wrapper img {
     max-width: 100%;
     width: 400px;
     height: auto;
@@ -186,7 +188,7 @@ main {
 }
 
 @media (max-width: 768px) {
-    .centered-image img {
+    .centered-image img, .image-wrapper img {
         width: 90%;
     }
 }
